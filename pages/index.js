@@ -1,42 +1,34 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
-import NotFound from "../components/NotFound";
-import Preloader from "../components/Preloader";
-import Section from "../components/Section";
+import { useState } from "react"
+import "./../node_modules/bootstrap/dist/css/bootstrap.min.css"
 
 export default function Component(props) {
-    const [event, setEvent] = useState(null);
-    const [isNotFound, setIsNotFound] = useState(false);
-
-    useEffect(() => {
-        const site = (location.origin.replace(/(https:\/\/|http:\/\/)/g, "").split(":")[0])
-        if (props.events[site]) {
-            setEvent(props.events[site])
-        } else {
-            setIsNotFound(true)
-        }
-    }, [])
+    const [products, setProducts] = useState(props.products);
 
     return (
-      <>
-        {
-           (event && !isNotFound) && <>
-              <img src={event.logo} style={{ width: "100%", height: "300px"}}/>
-              <Section section={event.section1} /> 
-            </>
+      <div className="container" >
+        { 
+          products.map(product => {
+            return (
+              
+              <div className="card card-default p-2 mb-1">
+                <h3>{product.title}</h3>
+                <p>{product.description}</p> 
+                <button className="btn btn-primary">R$ {product.price}</button>               
+              </div>
+            ); 
+          })
         }
-        <Preloader isShow={(!event && !isNotFound)} />
-        <NotFound isNotFound={isNotFound} />
-      </>
+      </div>
     )
 }
 
 
 export async function getStaticProps() {
-    const events = await axios.get("http://localhost:5000/events")
+    const response = await axios.get("http://localhost:5000/products")
     return {
       props: {
-        events: events.data
+        products: response.data
       },
       revalidate: 120 
     }

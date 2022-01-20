@@ -5,7 +5,7 @@ exports.id = 405;
 exports.ids = [405];
 exports.modules = {
 
-/***/ 837:
+/***/ 973:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -24,114 +24,42 @@ const external_axios_namespaceObject = require("axios");
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_namespaceObject);
 // EXTERNAL MODULE: external "react"
 var external_react_ = __webpack_require__(689);
-;// CONCATENATED MODULE: ./components/NotFound.js
-
-
-/* harmony default export */ const NotFound = (({ isNotFound  })=>{
-    if (!isNotFound) return false;
-    return(/*#__PURE__*/ jsx_runtime_namespaceObject.jsx(jsx_runtime_namespaceObject.Fragment, {
-        children: "Event don't available!!!!"
-    }));
-});
-
-;// CONCATENATED MODULE: ./components/Preloader.js
-
-
-/* harmony default export */ const Preloader = (({ isShow  })=>{
-    if (!isShow) return false;
-    return(/*#__PURE__*/ jsx_runtime_namespaceObject.jsx(jsx_runtime_namespaceObject.Fragment, {
-        children: "Loading...."
-    }));
-});
-
-;// CONCATENATED MODULE: ./components/Button.js
-
-
-/* harmony default export */ const Button = (({ button  })=>{
-    return(/*#__PURE__*/ jsx_runtime_namespaceObject.jsx("button", {
-        style: {
-            padding: "10px",
-            marginLeft: "5px",
-            marginTop: "10px"
-        },
-        children: button
-    }));
-});
-
-;// CONCATENATED MODULE: ./components/Section.js
-
-
-
-/* harmony default export */ const Section = (({ section  })=>{
-    if (!section) return false;
-    return(/*#__PURE__*/ (0,jsx_runtime_namespaceObject.jsxs)("div", {
-        style: {
-            "background": section.background,
-            width: "100%",
-            height: "200px",
-            textAlign: "center",
-            paddingTop: "15px"
-        },
-        children: [
-            section.text,
-            /*#__PURE__*/ jsx_runtime_namespaceObject.jsx("br", {
-            }),
-            section.buttons.length > 0 && section.buttons.map((button)=>/*#__PURE__*/ jsx_runtime_namespaceObject.jsx(Button, {
-                    button: button
-                })
-            )
-        ]
-    }));
-});
-
 ;// CONCATENATED MODULE: ./pages/index.js
 
 
 
 
-
-
 function Component(props) {
-    const { 0: event , 1: setEvent  } = (0,external_react_.useState)(null);
-    const { 0: isNotFound , 1: setIsNotFound  } = (0,external_react_.useState)(false);
-    (0,external_react_.useEffect)(()=>{
-        const site = location.origin.replace(/(https:\/\/|http:\/\/)/g, "").split(":")[0];
-        if (props.events[site]) {
-            setEvent(props.events[site]);
-        } else {
-            setIsNotFound(true);
-        }
-    }, []);
-    return(/*#__PURE__*/ (0,jsx_runtime_namespaceObject.jsxs)(jsx_runtime_namespaceObject.Fragment, {
-        children: [
-            event && !isNotFound && /*#__PURE__*/ (0,jsx_runtime_namespaceObject.jsxs)(jsx_runtime_namespaceObject.Fragment, {
+    const { 0: products , 1: setProducts  } = (0,external_react_.useState)(props.products);
+    return(/*#__PURE__*/ jsx_runtime_namespaceObject.jsx("div", {
+        className: "container",
+        children: products.map((product)=>{
+            return(/*#__PURE__*/ (0,jsx_runtime_namespaceObject.jsxs)("div", {
+                className: "card card-default p-2 mb-1",
                 children: [
-                    /*#__PURE__*/ jsx_runtime_namespaceObject.jsx("img", {
-                        src: event.logo,
-                        style: {
-                            width: "100%",
-                            height: "300px"
-                        }
+                    /*#__PURE__*/ jsx_runtime_namespaceObject.jsx("h3", {
+                        children: product.title
                     }),
-                    /*#__PURE__*/ jsx_runtime_namespaceObject.jsx(Section, {
-                        section: event.section1
+                    /*#__PURE__*/ jsx_runtime_namespaceObject.jsx("p", {
+                        children: product.description
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime_namespaceObject.jsxs)("button", {
+                        className: "btn btn-primary",
+                        children: [
+                            "R$ ",
+                            product.price
+                        ]
                     })
                 ]
-            }),
-            /*#__PURE__*/ jsx_runtime_namespaceObject.jsx(Preloader, {
-                isShow: !event && !isNotFound
-            }),
-            /*#__PURE__*/ jsx_runtime_namespaceObject.jsx(NotFound, {
-                isNotFound: isNotFound
-            })
-        ]
+            }));
+        })
     }));
 };
 async function getStaticProps() {
-    const events = await external_axios_default().get("http://localhost:5000/events");
+    const response = await external_axios_default().get("http://localhost:5000/products");
     return {
         props: {
-            events: events.data
+            products: response.data
         },
         revalidate: 120
     };
@@ -154,7 +82,7 @@ module.exports = require("react");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = (__webpack_exec__(837));
+var __webpack_exports__ = (__webpack_exec__(973));
 module.exports = __webpack_exports__;
 
 })();
